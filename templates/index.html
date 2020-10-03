@@ -1,36 +1,59 @@
 <HTML>
 <BODY bgcolor="cyan">
 
-<table>
-    <thead>
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for row in value %}
-    <tr>
-        <td>{{row[0]}}</td>
-        <td>{{row[1]}}</td>
-        <td>
-            <form action="{{ url_for('delete_user', user_id=row[2]) }}" method=post>
-                <input type=submit value=Delete>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>First Name</th>-->
+<!--        <th>Last Name</th>-->
+<!--        <th></th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    {% for row in users %}-->
+<!--    <tr>-->
+<!--        <td>{{row[0]}}</td>-->
+<!--        <td>{{row[1]}}</td>-->
+<!--        <td>-->
+<!--            <form action="{{ url_for('delete_user', user_id=row[2]) }}" method=post>-->
+<!--                <input type=submit value=Delete>-->
+<!--            </form>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    {% endfor %}-->
+<!--    </tbody>-->
+<!--</table>-->
 
-<form method="POST" action="" autocomplete="off">
-    <center>
-        <H1>Enter your details </H1> <br>
-        First Name <input type="text" name="fname"/> <br>
-        Last Name <input type="text" name="lname"/> <br>
-        <input type="submit">
-    </center>
+<form method="GET" action="" name="selectLetters">
+    <p>
+        Select first Letter: <select onchange="document.forms[0].submit()" name="firstLetterSelected">
+        <option value="0">-</option>
+        {% for row in first_letters %}
+        <option value="{{ row[0] }}" {% if row[0]== request.args[
+        'firstLetterSelected'] %} selected {% endif %}>{{ row[0] }}</option>
+        {% endfor %}
+    </select>
+    </p>
+    <p>
+        Select second Letter: <select onchange="document.forms[0].submit()" name="secondLetterSelected">
+        <option value="0">-</option>
+        {% for row in second_letters %}
+        <option value="{{ row[0] }}" {% if row[0]== request.args[
+        'secondLetterSelected'] %} selected {% endif %}>{{ row[0] }}</option>
+        {% endfor %}
+    </select>
+    </p>
+    <p>
+        Select word: <select onchange="document.forms[0].submit()" name="wordSelected">
+        <option value="">-</option>
+        {% for row in words %}
+        <option value="{{ row[0] }}" {% if row[0]== request.args[
+        'wordSelected'] %} selected {% endif %}>{{ row[0] }}</option>
+        {% endfor %}
+    </select>
+    </p>
 </form>
+Selected Word: {{ request.args['wordSelected'] }}
+
 </BODY>
 </HTML>
