@@ -48,7 +48,7 @@ def display_page():
 
 def read_first_letters():
     cursor = mysql.connection.cursor()
-    cursor.execute("select DISTINCT LEFT(Word, 1) FROM WORDS")
+    cursor.execute("select DISTINCT LEFT(Word, 1) FROM Words")
     return cursor.fetchall()
 
 
@@ -56,7 +56,7 @@ def read_second_letters(first_letter):
     if first_letter is None:
         return []
     cursor = mysql.connection.cursor()
-    cursor.execute("select DISTINCT LEFT(Word, 2) FROM WORDS WHERE LEFT(Word, 1) = %s", first_letter)
+    cursor.execute("select DISTINCT LEFT(Word, 2) FROM Words WHERE LEFT(Word, 1) = %s", first_letter)
     return cursor.fetchall()
 
 
@@ -68,11 +68,11 @@ def read_words(first_letter, second_letter):
 
     if second_letter is None:
         cursor = mysql.connection.cursor()
-        cursor.execute("select Word FROM WORDS WHERE LEFT(Word, 1) = %s", [first_letter])
+        cursor.execute("select Word FROM Words WHERE LEFT(Word, 1) = %s", [first_letter])
         return cursor.fetchall()
 
     cursor = mysql.connection.cursor()
-    cursor.execute("select Word FROM WORDS WHERE LEFT(Word, 2) = %s", [second_letter])
+    cursor.execute("select Word FROM Words WHERE LEFT(Word, 2) = %s", [second_letter])
     return cursor.fetchall()
 
 
