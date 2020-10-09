@@ -1,0 +1,15 @@
+<html>
+<body bgcolor="cyan">
+
+<h1>{{ request.args.get('word') }}</h1>
+<ul>
+    {% for row in definitions %}
+    <li><em>({{ row[0] }})</em> {{ row[1] }}</li>
+    {% endfor %}
+
+</ul>
+
+<a href="javascript:history.back()">Back</a>
+
+</body>
+</html>

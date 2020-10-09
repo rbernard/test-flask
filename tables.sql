@@ -1,6 +1,7 @@
 CREATE TABLE Words (
     id int NOT NULL AUTO_INCREMENT,
-    Word varchar(255),
+    Word TINYTEXT,
+    Type TINYTEXT,
+    Definition MEDIUMTEXT,
     PRIMARY KEY (id)
 );
-

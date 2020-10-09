@@ -1,36 +1,64 @@
-<HTML>
-<BODY bgcolor="cyan">
+<html>
+<head>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+/*
+            $('#selectLetters').submit(function(e) {
+                const firstLetter = $('[name="firstLetterSelected"]').val()
+                const secondLetter = $('[name="secondLetterSelected"]').val()
+                const word = $('[name="wordSelected"]').val()
+                if(! word.startsWith(secondLetter))
+                   $('[name="wordSelected"]').val('')
+                if(! secondLetter.startsWith(firstLetter))
+                  $('[name="secondLetterSelected"]').val('')
+            })
+            */
+        });
+    </script>
+</head>
+<body bgcolor="cyan">
 
-<form method="GET" action="" name="selectLetters">
+<form method="GET" action="" name="selectLetters" id="selectLetters">
     <p>
-        Select first Letter: <select onchange="document.forms[0].submit()" name="firstLetterSelected">
-        <option value="0">-</option>
-        {% for row in first_letters %}
-        <option value="{{ row[0] }}" {% if row[0]== request.args[
-        'firstLetterSelected'] %} selected {% endif %}>{{ row[0] }}</option>
-        {% endfor %}
-    </select>
+        Select first Letter:
+        <select onchange="document.forms[0].submit()" name="firstLetterSelected">
+            <option value="0">-</option>
+            {% for row in first_letters %}
+                <option value="{{ row[0] }}"
+                        {% if row[0]== request.args['firstLetterSelected'] %} selected {% endif %}>{{ row[0] }}
+                </option>
+            {% endfor %}
+        </select>
     </p>
     <p>
-        Select second Letter: <select onchange="document.forms[0].submit()" name="secondLetterSelected">
-        <option value="0">-</option>
-        {% for row in second_letters %}
-        <option value="{{ row[0] }}" {% if row[0]== request.args[
-        'secondLetterSelected'] %} selected {% endif %}>{{ row[0] }}</option>
-        {% endfor %}
-    </select>
+        Select second Letter:
+        <select onchange="document.forms[0].submit()" name="secondLetterSelected">
+            <option value="0">-</option>
+            {% for row in second_letters %}
+                <option value="{{ row[0] }}"
+                        {% if row[0]== request.args['secondLetterSelected'] %} selected {% endif %}>{{ row[0] }}
+                </option>
+            {% endfor %}
+        </select>
     </p>
     <p>
-        Select word: <select onchange="document.forms[0].submit()" name="wordSelected">
+        Select word:
+        <select onchange="document.forms[0].submit()" name="wordSelected">
         <option value="">-</option>
-        {% for row in words %}
-        <option value="{{ row[0] }}" {% if row[0]== request.args[
-        'wordSelected'] %} selected {% endif %}>{{ row[0] }}</option>
-        {% endfor %}
-    </select>
+            {% for row in words %}
+                <option value="{{ row[0] }}"
+                        {% if row[0]== request.args['wordSelected'] %} selected {% endif %}>{{ row[0] }}
+                </option>
+            {% endfor %}
+        </select>
     </p>
 </form>
-Selected Word: {{ request.args['wordSelected'] }}
 
-</BODY>
-</HTML>
+
+<a href="{{ url_for('definitions', word=request.args['wordSelected']) }}">
+    Selected Word: {{ request.args['wordSelected']}}
+</a>
+
+</body>
+</html>
